@@ -18,10 +18,7 @@ class User(UserMixin,db.Model):
     password_hash = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
     bio = db.Column(db.String(255))
-    comments = db.relationship('Comments',backref = 'comments',lazy = "dynamic")
-    pitches = db.relationship('Pitches',backref = 'author',lazy = "dynamic")
-    likes = db.relationship('Likes', backref = 'user', lazy = 'dynamic')
-    dislikes = db.relationship('Dislikes', backref = 'user', lazy = 'dynamic')
+  
     @property
     def password(self):
         raise AttributeError('You cannnot access this attribute')
