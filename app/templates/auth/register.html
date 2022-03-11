@@ -1,0 +1,17 @@
+{% extends 'auth/auth-base.html'%} {% import 'bootstrap/wtf.html' as wtf%} {% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2>Sign Up</h2>
+            {{wtf.quick_form(registration_form)}}
+            <a href=" {{url_for('auth.login')}}">
+                Have an account? Sign In
+            </a>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endblock%}
