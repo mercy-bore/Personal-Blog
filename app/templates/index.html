@@ -17,9 +17,13 @@
         {% endif %}
         <h2>Welcome to My Personal Blog.</h2>
         <p><a style="background-color: #b5179e; color: white;" href=" {{url_for('main.blog_form')}} " class="btn btn-primary" role="button">Blog</a></p>
-        {% for quote in get_quote %}
+        <!-- {% for quote in get_quote %}
         <p style="color: #b5179e">{{quote.quote}}</p>
-        <em> <p>{{quote.author}}</p> </em> {% endfor %}
+        <em> <p>{{quote.author}}</p> </em> {% endfor %} -->
+        <h3 class="" id="card">Subscribe to get updates on new blogs</h3>
+        <p><a style="background-color: #b5179e; color: white;" href="/Subscribe" class="btn btn-primary" role="button">Subscribe</a></p>
+        </p>
+
 
 
     </div>

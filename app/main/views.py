@@ -1,9 +1,10 @@
-from flask import render_template,redirect,url_for,abort,request
+from flask import render_template,redirect,url_for,abort,request,flash
 from idna import valid_string_length
 from . import main
-from ..requests import get_quote
-from .forms import CommentForm,UpdateProfile,BlogForm
-from ..models import User,Comments,Blogs,Quote
+from ..email import mail_message
+# from ..requests import get_quote
+from .forms import CommentForm,UpdateProfile,BlogForm,SubscribeForm
+from ..models import User,Comments,Blogs,Subscribe
 from flask_login import login_required, current_user
 from .. import db
 import markdown2  
@@ -13,10 +14,10 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    getQuote = get_quote()
+    # getQuote = get_quote()
     blogs = Blogs.query.all()
     title = 'Home - Welcome to my Personal Blog Website'    
-    return render_template('index.html',blogs = blogs, title = title,getQuote=getQuote)
+    return render_template('index.html',blogs = blogs, title = title) #getQuote=getQuote
 
 @main.route('/blog/',methods = ['GET','POST'])
 @login_required
@@ -81,5 +82,19 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
+
+@main.route('/Subscribe',methods=['GET','POST'])
+def subscribe():
+
+    form = SubscribeForm()
+    if form.validate_on_submit():
+        sub = Subscribe(email = form.email.data, username = form.username.data)    
+        db.session.add(sub)
+        db.session.commit()
+
+
+        mail_message("You have successfully subscribed to new bolgs notifications", "email/welcome", sub.email,sub=sub)
+        return redirect(url_for('main.index'))
+    return render_template('subscribe.html',subscribe_form=form)
 
 
