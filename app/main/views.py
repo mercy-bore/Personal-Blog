@@ -16,6 +16,8 @@ def index():
     '''
     # getQuote = get_quote()
     blogs = Blogs.query.all()
+    blogs = Blogs.query.filter_by(posted = index).first()
+
     title = 'Home - Welcome to my Personal Blog Website'    
     return render_template('index.html',blogs = blogs, title = title) #getQuote=getQuote
 

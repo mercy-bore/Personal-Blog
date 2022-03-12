@@ -33,8 +33,9 @@
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
                 <div class="caption">
-                    <h3 style="color: #893168; "> {{blog.title}}</h3>
+                    <h3 style="color: #893168; "> {{blog.title}} </h3>
                     <p> {{blog.blog_text}}</p>
+                    <p>Posted on: {{blog.posted}}</p>
                     <p><a style="background-color:#b5179e; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a></p>
                 </div>
             </div>
