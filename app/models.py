@@ -35,7 +35,6 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username}'
     
-    
 class Comments(db.Model):
 
     __tablename__ = 'comments'
@@ -96,15 +95,11 @@ class Blogs(db.Model):
     def __repr__(self):
         return f"Blogs {self.blog_text}','{self.posted}')" 
 
-
-  
-  
 class Quote:
     '''
   Quote class to define Quote Objects
     '''
-    def __init__(self,id,author,quote):
-        self.id = id
+    def __init__(self,author,quote):
         self.author = author
         self.quote = quote
 class Subscribe(db.Model):

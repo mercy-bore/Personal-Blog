@@ -2,7 +2,7 @@ from flask import render_template,redirect,url_for,abort,request,flash
 from idna import valid_string_length
 from . import main
 from ..email import mail_message
-# from ..requests import get_quote
+from ..requests import get_quote
 from .forms import CommentForm,UpdateProfile,BlogForm,SubscribeForm,UpdateBlog
 from ..models import User,Comments,Blogs,Subscribe
 from flask_login import login_required, current_user
@@ -14,12 +14,12 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    # getQuote = get_quote()
+    quote = get_quote()
     blogs = Blogs.query.all()
 
 
     title = 'Home - Welcome to my Personal Blog Website'    
-    return render_template('index.html',blogs = blogs, title = title, )   #getQuote=getQuote
+    return render_template('index.html',blogs = blogs, title = title, quote=quote)   
 
 @main.route('/blog/',methods = ['GET','POST'])
 @login_required

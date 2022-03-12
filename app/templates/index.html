@@ -4,28 +4,27 @@
 {% block styles%} {{ super() }}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"> {% endblock %}
 
-
 <!-- Content block -->
 {% block content %}
 
 <div class="container-fluid">
     <div class="row" style="padding-left: 30px; ">
         {% if current_user.is_authenticated %}
-        <h1>Hello {{current_user.username}},</h1>
+        <h2>Hello {{current_user.username}},</h2>
         {% else %}
-        <h1>Hello stranger</h1>
+        <h2>Hello stranger</h2>
         {% endif %}
-        <h2>Welcome to My Personal Blog.</h2>
+        <h3>Welcome to My Personal Blog.</h3>
+        <h4>Feel free to add a blog.</h4>
         <p><a style="background-color: #b5179e; color: white;" href=" {{url_for('main.blog_form')}} " class="btn btn-primary" role="button">Blog</a></p>
-        <!-- {% for quote in get_quote %}
+
+        <h3>Quote:</h3>
+        {% for quote in quote %}
         <p style="color: #b5179e">{{quote.quote}}</p>
-        <em> <p>{{quote.author}}</p> </em> {% endfor %} -->
+        <em> <p>By: {{quote.author}}</p> </em> {% endfor %}
         <h3 class="" id="card">Subscribe to get updates on new blogs</h3>
         <p><a style="background-color: #b5179e; color: white;" href="/subscribe" class="btn btn-primary" role="button">Subscribe</a></p>
         </p>
-
-
-
     </div>
     <div class="row">
         {% for blog in blogs[::-1] %}
@@ -40,13 +39,10 @@
                         <a style="background-color:#b5179e; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a>
                         <a style="color:#b5179e; background-color: white;" href="{{url_for( 'main.delete_blog',id=blog.id)}}" class="btn btn-primary" role="button">Delete</a>
                         <a style="background-color:#b5179e; color: white;" href=" {{url_for('main.update_blog',blog_id = blog.id)}} " class="btn btn-primary" role="button">Update</a>
-
                     </p>
                 </div>
             </div>
         </div> {% endfor %}
-
     </div>
-
 </div>
 {% endblock%}
