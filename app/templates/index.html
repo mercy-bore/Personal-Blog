@@ -22,13 +22,13 @@
 
     </div>
     <div class="row">
-        {% for blog in blogss %}
+        {% for blog in blogs %}
 
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
                 <div class="caption">
                     <h3> {{blog.title}}</h3>
-                    <p>My blog: {{pitch.pitch_text}}</p>
+                    <p>My blog: {{blog.blog_text}}</p>
                     <p><a style="background-color: black; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a></p>
                 </div>
             </div>
