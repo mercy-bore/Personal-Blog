@@ -59,6 +59,10 @@ class Comments(db.Model):
         db.session.delete(self)
         db.session.commit()
         
+    def update_blog(self):
+        db.session.update(self)
+        db.session.commit() 
+        
     def __repr__(self):
         return f'Comment {self.comment},{self.posted}'
 class Blogs(db.Model):
