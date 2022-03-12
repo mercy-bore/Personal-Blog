@@ -101,6 +101,11 @@ class Subscribe(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return f'Subscribe {self.username}'
+    

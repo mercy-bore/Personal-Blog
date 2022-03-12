@@ -83,18 +83,18 @@ def update_profile(uname):
 
     return render_template('profile/update.html',form =form)
 
-@main.route('/Subscribe',methods=['GET','POST'])
+@main.route('/subscribe',methods=['GET','POST'])
 def subscribe():
 
-    form = SubscribeForm()
-    if form.validate_on_submit():
-        sub = Subscribe(email = form.email.data, username = form.username.data)    
+    subscribe_form = SubscribeForm()
+    
+    if subscribe_form.validate_on_submit():
+        sub = Subscribe(email = subscribe_form.email.data, username = subscribe_form.username.data)    
         db.session.add(sub)
         db.session.commit()
 
-
-        mail_message("You have successfully subscribed to new bolgs notifications", "email/welcome", sub.email,sub=sub)
+        mail_message("You have successfully subscribed to new blogs notifications", "email/sub", sub.email,sub=sub)
         return redirect(url_for('main.index'))
-    return render_template('subscribe.html',subscribe_form=form)
+    return render_template('subscribe.html',subscribe_form=subscribe_form)
 
 
