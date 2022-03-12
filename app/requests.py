@@ -1,4 +1,4 @@
-import urllib.request,json
+import json,requests
 from app.models import Quote
 
 
