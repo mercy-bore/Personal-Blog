@@ -55,12 +55,12 @@ class Comments(db.Model):
         comments = Comments.query.filter_by(blog_id=blog_id).all()
         return comments
     
-    def deleteComment(self):
+    def delete_comment(self):
         db.session.delete(self)
         db.session.commit()
         
     def __repr__(self):
-        return f'Comment {self.blog_comment}'
+        return f'Comment {self.comment},{self.posted}'
 class Blogs(db.Model):
 
     __tablename__ = 'blogs'
@@ -75,7 +75,7 @@ class Blogs(db.Model):
         db.session.add(self)
         db.session.commit()
     
-    def deleteblog(self):
+    def delete_blog(self):
         db.session.delete(self)
         db.session.commit() 
 
