@@ -19,7 +19,7 @@ def index():
 
 
     title = 'Home - Welcome to my Personal Blog Website'    
-    return render_template('index.html',blogs = blogs, title = title) #getQuote=getQuote
+    return render_template('index.html',blogs = blogs, title = title, )   #getQuote=getQuote
 
 @main.route('/blog/',methods = ['GET','POST'])
 @login_required
