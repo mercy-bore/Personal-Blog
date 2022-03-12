@@ -63,7 +63,7 @@ class Blogs(db.Model):
     __tablename__ = 'blogs'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(255))
-    blog_text = db.Column(db.String(400))
+    blog_text = db.Column(db.String(2000))
     posted = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comments', backref = 'blogs', lazy='dynamic')

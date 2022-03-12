@@ -20,20 +20,23 @@ def index():
 @login_required
 def blog_form():
     blog_form = BlogForm()
+    title = ' Blog page '    
+
     if blog_form.validate_on_submit():
         title = blog_form.title.data
-        text = blog_form.text.data
+        blog_text = blog_form.blog_text.data
         
-        new_blogs = Blogs(text=text,user_id=current_user._get_current_object().id,title = title)
+        new_blogs = Blogs(blog_text=blog_text,user_id=current_user._get_current_object().id,title = title)
         new_blogs.save_b()
         return redirect(url_for('main.index' ))
 
-    return render_template('new_blog.html', blog_form=blog_form )
+    return render_template('new_blog.html', blog_form=blog_form, title=title )
 
 @main.route('/comment/<int:blog_id>', methods = ['GET','POST'])
 @login_required
 def comment(blog_id):
     comment_form = CommentForm()
+    title = ' Comments page '    
     blogs = Blogs.query.get(blog_id)
     comments = Comments.get_comment(blog_id)
     user = User.query.filter_by(id=id)
@@ -46,7 +49,7 @@ def comment(blog_id):
         new_comment.save()
         return redirect(url_for('main.comment',blog_id = blog_id ))
 
-    return render_template('comment.html',comment_form=comment_form,blogs=blogs,comments=comments,user=user)
+    return render_template('comment.html',comment_form=comment_form,blogs=blogs,comments=comments,user=user,title = title)
     
 @main.route('/user/<uname>')
 def profile(uname):
