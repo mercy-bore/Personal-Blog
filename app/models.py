@@ -83,9 +83,9 @@ class Blogs(db.Model):
         db.session.delete(self)
         db.session.commit() 
         
-    def update_blog(self):
-        db.session.update(self)
-        db.session.commit() 
+    # def update_blog(self):
+    #     db.session.update(self)
+    #     db.session.commit() 
 
     @classmethod
     def get_blogs(cls):

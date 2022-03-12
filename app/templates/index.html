@@ -39,7 +39,7 @@
                     <p>
                         <a style="background-color:#b5179e; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a>
                         <a style="color:#b5179e; background-color: white;" href="{{url_for( 'main.delete_blog',id=blog.id)}}" class="btn btn-primary" role="button">Delete</a>
-                        <a style="background-color:#b5179e; color: white;" href=" {{url_for('main.update_blog',id = blog.id)}} " class="btn btn-primary" role="button">Update</a>
+                        <a style="background-color:#b5179e; color: white;" href=" {{url_for('main.update_blog',blog_id = blog.id)}} " class="btn btn-primary" role="button">Update</a>
 
                     </p>
                 </div>

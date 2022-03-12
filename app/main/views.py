@@ -124,12 +124,19 @@ def update_comment(id):
     db.session.commit()
     return redirect (url_for('main.index'))
 
-@main.route('/update_blog/<int:id>', methods=['GET', 'POST'])
+
+
+
+@main.route('/update_blog/<int:blog_id>', methods=['GET','POST'])
 @login_required
-def update_blog(id):
-    blog_text = Blogs.query.get_or_404(id)
-    db.session.update(blog_text)
-    db.session.commit()
-    return redirect (url_for('main.index'))
-
-
+def update_blog(blog_id):
+    form = UpdateBlog()
+  
+    
+    if form.validate_on_submit():
+        blog = Blogs.query.filter_by(id=blog_id).first()
+        text=form.text.data
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for('main.index', blog_id=blog_id, text=text))
+    return render_template('update_blog.html', form=form)
