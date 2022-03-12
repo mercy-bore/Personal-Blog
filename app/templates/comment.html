@@ -1,0 +1,31 @@
+{% extends 'base.html'%} {% import 'bootstrap/wtf.html' as wtf %} {% block content%}
+<div class="container-fluid">
+    {{user.username}} {{blogs.blogs}}{% if comments %}
+    <div class="row">
+        <div class="col-sm-8">
+            {{wtf.quick_form(comment_form)}}
+        </div>
+        <div class="col-sm-4">
+            <h3>Comments:</h3>
+            {% for comment in comments %}
+            <div class="card w-90 mb-3">
+                <div class="card-body">
+                    <ul>
+                        <li>
+                            <h5> {{ comment.comment }}</h5>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            {% endfor%}
+
+        </div>
+        {%else%}
+        <div class="col-md-5">This blog has no comments.</div>
+        <div class="col-md-5">
+            {{wtf.quick_form(comment_form)}}
+        </div>
+        {%endif%}
+    </div>
+    {%endblock%}
