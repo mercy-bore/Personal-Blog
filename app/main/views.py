@@ -1,8 +1,9 @@
 from flask import render_template,redirect,url_for,abort,request
 from idna import valid_string_length
 from . import main
+from ..requests import get_quote
 from .forms import CommentForm,UpdateProfile,BlogForm
-from ..models import User,Comments,Blogs
+from ..models import User,Comments,Blogs,Quote
 from flask_login import login_required, current_user
 from .. import db
 import markdown2  
@@ -12,9 +13,10 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
+    quote = get_quote('quote')
     blogs = Blogs.query.all()
     title = 'Home - Welcome to my Personal Blog Website'    
-    return render_template('index.html',blogs = blogs, title = title)
+    return render_template('index.html',blogs = blogs, title = title,quote=quote)
 
 @main.route('/blog/',methods = ['GET','POST'])
 @login_required
@@ -81,4 +83,3 @@ def update_profile(uname):
     return render_template('profile/update.html',form =form)
 
 
-    

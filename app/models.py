@@ -71,6 +71,20 @@ class Blogs(db.Model):
     def save_b(self):
         db.session.add(self)
         db.session.commit()
+    
+    def deleteblog(self):
+        db.session.delete(self)
+        db.session.commit() 
+
+    @classmethod
+    def get_blogs(cls):
+        blog = Blogs.query.all()
+        return blog
+
+
+    def __repr__(self):
+        return f"Blogs {self.blog_text}','{self.posted}')" 
+
 
   
   
@@ -78,20 +92,7 @@ class Quote:
     '''
   Quote class to define Quote Objects
     '''
-
-    __tablename__ = 'quotes'
-    id = db.Column(db.Integer, primary_key = True)
-    author = db.Column(db.String(255))
-    quote = db.Column(db.String(2000))
-    
-    def save(self,):
-            db.session.add(self)
-            db.session.commit()
-
-    @classmethod
-    def get_quote(cls,id):
-        quote = Quote.query.filter_by(id=id).all()
-        return quote
-    
-    def __repr__(self):
-        return f'Comment {self.quote}'
+    def __init__(self,id,author,quote):
+        self.id = id
+        self.author = author
+        self.quote = quote
