@@ -28,7 +28,7 @@
 
     </div>
     <div class="row">
-        {% for blog in blogs %}
+        {% for blog in blogs[::-1] %}
 
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
@@ -36,7 +36,12 @@
                     <h3 style="color: #893168; "> {{blog.title}} </h3>
                     <p> {{blog.blog_text}}</p>
                     <p>Posted on: {{blog.posted}}</p>
-                    <p><a style="background-color:#b5179e; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a></p>
+                    <p>
+                        <a style="background-color:#b5179e; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a>
+                        <a style="color:#b5179e; background-color: white;" href="{{url_for( 'main.delete_blog',id=blog.id)}}" class="btn btn-primary" role="button">Delete</a>
+                        <a style="background-color:#b5179e; color: white;" href=" {{url_for('main.update_blog',id = blog.id)}} " class="btn btn-primary" role="button">Update</a>
+
+                    </p>
                 </div>
             </div>
         </div> {% endfor %}

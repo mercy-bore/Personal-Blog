@@ -13,6 +13,11 @@ class BlogForm(FlaskForm):
      title = StringField('Title',validators = [DataRequired()])
      blog_text = TextAreaField('Write your blog...',validators = [DataRequired()])
      submit = SubmitField('Submit')
+     
+class UpdateBlog(FlaskForm):
+    text = TextAreaField('Edit blog ',validators = [DataRequired()])
+    submit = SubmitField('Update')
+
 class SubscribeForm(FlaskForm):
     email = StringField('Enter your  email',validators = [DataRequired()])
     username = StringField('Username', validators = [DataRequired()])

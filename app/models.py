@@ -41,7 +41,7 @@ class Comments(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer,primary_key = True)
-    blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'),nullable = False)
+    blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'))
     comment = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
@@ -59,7 +59,7 @@ class Comments(db.Model):
         db.session.delete(self)
         db.session.commit()
         
-    def update_blog(self):
+    def update_comment(self):
         db.session.update(self)
         db.session.commit() 
         
@@ -82,6 +82,7 @@ class Blogs(db.Model):
     def delete_blog(self):
         db.session.delete(self)
         db.session.commit() 
+        
     def update_blog(self):
         db.session.update(self)
         db.session.commit() 

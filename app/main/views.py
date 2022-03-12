@@ -3,7 +3,7 @@ from idna import valid_string_length
 from . import main
 from ..email import mail_message
 # from ..requests import get_quote
-from .forms import CommentForm,UpdateProfile,BlogForm,SubscribeForm
+from .forms import CommentForm,UpdateProfile,BlogForm,SubscribeForm,UpdateBlog
 from ..models import User,Comments,Blogs,Subscribe
 from flask_login import login_required, current_user
 from .. import db
@@ -16,7 +16,7 @@ def index():
     '''
     # getQuote = get_quote()
     blogs = Blogs.query.all()
-    blogs = Blogs.query.filter_by(posted = index).first()
+
 
     title = 'Home - Welcome to my Personal Blog Website'    
     return render_template('index.html',blogs = blogs, title = title) #getQuote=getQuote
@@ -98,5 +98,38 @@ def subscribe():
         mail_message("You have successfully subscribed to new blogs notifications", "email/sub", sub.email,sub=sub)
         return redirect(url_for('main.index'))
     return render_template('subscribe.html',subscribe_form=subscribe_form)
+
+
+@main.route('/delete_comment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(id):
+    comment =Comments.query.get_or_404(id)
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect (url_for('main.index'))
+
+@main.route('/delete_blog/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_blog(id):
+    blog_text = Blogs.query.get_or_404(id)
+    db.session.delete(blog_text)
+    db.session.commit()
+    return redirect (url_for('main.index'))
+
+@main.route('/update_comment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update_comment(id):
+    comment =Comments.query.get_or_404(id)
+    db.session.update(comment)
+    db.session.commit()
+    return redirect (url_for('main.index'))
+
+@main.route('/update_blog/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update_blog(id):
+    blog_text = Blogs.query.get_or_404(id)
+    db.session.update(blog_text)
+    db.session.commit()
+    return redirect (url_for('main.index'))
 
 
