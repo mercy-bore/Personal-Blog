@@ -4,7 +4,7 @@ class Config:
     General configuration parent class
     '''
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    QUOTES_API_URL = 'http://quotes.stormconsultancy.co.uk/random.json'
+    BASE_URL = 'http://quotes.stormconsultancy.co.uk/random.json'
 
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:2015@localhost/blogs'
     SQLALCHEMY_TRACK_MODIFICATIONS = False

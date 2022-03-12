@@ -3,18 +3,19 @@ from app.models import Quote
 
 
 # Getting quote url
-quotes_url = None
+base_url = None
 
 def configure_request(app):
-    global quotes_url
-    quotes_url = app.config['QUOTES_API_URL']
+    global base_url
+    base_url = app.config['BASE_URL']
     
 def get_quote():
-    get_quote = requests.get(quotes_url)
+    res = requests.get(base_url)
+    
     response = []
-    id = get_quote.get('id')
-    author = get_quote.get('author')
-    quote =get_quote.get('quote')
+    id = res.get('id')
+    author = res.get('author')
+    quote = res.get('quote')
     
     quote_object = Quote(id,author,quote)
     response.append(quote_object)

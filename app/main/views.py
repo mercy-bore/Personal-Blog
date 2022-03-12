@@ -13,10 +13,10 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    quote = get_quote('quote')
+    getQuote = get_quote()
     blogs = Blogs.query.all()
     title = 'Home - Welcome to my Personal Blog Website'    
-    return render_template('index.html',blogs = blogs, title = title,quote=quote)
+    return render_template('index.html',blogs = blogs, title = title,getQuote=getQuote)
 
 @main.route('/blog/',methods = ['GET','POST'])
 @login_required
