@@ -38,7 +38,7 @@ def comment(blog_id):
     comment_form = CommentForm()
     title = ' Comments page '    
     blogs = Blogs.query.get(blog_id)
-    comment = Comments.query.get_comment(blog_id)
+    comments = Comments.get_comment(blog_id)
     user = User.query.filter_by(id=id)
     if comment_form.validate_on_submit():
         comment = comment_form.comment.data
@@ -49,7 +49,7 @@ def comment(blog_id):
         new_comment.save()
         return redirect(url_for('main.comment',blog_id = blog_id ))
 
-    return render_template('comment.html',comment_form=comment_form,blogs=blogs,comment=comment,user=user,title = title)
+    return render_template('comment.html',comment_form=comment_form,blogs=blogs,comments=comments,user=user,title = title)
     
 @main.route('/user/<uname>')
 def profile(uname):

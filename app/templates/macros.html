@@ -1,0 +1,16 @@
+{% macro displayBlogs(blogs) %}
+
+
+<div class="blogs">
+    {% for blog in blogs %}
+    <div class="blog ">
+        <h4 class="blog__username">{{blog.user.username}} </h4>
+        <p class="blog_text"> {{blog.blog_text}} </p>
+
+
+        {% for comment in blog.comments %}
+        <p>{{comment.user.username}}: {{comment.text}} </p>
+
+        {% endfor %} {% endfor %}
+    </div>{% endmacro %}
+</div>

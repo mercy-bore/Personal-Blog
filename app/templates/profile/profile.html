@@ -1,19 +1,26 @@
-{% extends 'base.html'%} {% block content %}
-<div class="container">
+{% extends 'base.html'%} {% import 'macros.html' as macro%} {% block content %}
+<div class="container-fluid" style="background-color:#b5179e; color: white; height: 600px">
     <div class="row">
         <!-- displaying  Username-->
         <div class="col-md-4">
-            <h3> {{user.username| capitalize}} </h3>
+            <h3> Name<br> @{{user.username| capitalize}} </h3>
 
             <!--Displaying user bio-->
             {% if user.bio %}
-            <p> {{user.bio}}</p>
-            {%else%}
+            <p>Bio
+                <br> # {{user.bio}}</p> {%else%}
             <p> {{user.username| capitalize}} You have no bio</p>
             {% endif %} {% if user == current_user %}
-            <a href="{{url_for('main.update_profile',uname=user.username)}}">Add bio</a> {% endif %}
+            <p><a style="color:#b5179e; background-color: white;" href=" {{url_for('main.update_profile',uname=user.username)}} " class="btn btn-primary" role="button">Add bio</a></p>
+            {% endif%}
         </div>
 
     </div>
+    {% if blogs %}
+    <h3>Your blogs</h3> {{macro.displayBlogs(blogs)}} {% else %}
+
+    <p>You have no Blogs.</p>
+
+    {% endif %}
 </div>
 {% endblock %}

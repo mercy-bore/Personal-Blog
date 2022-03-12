@@ -42,7 +42,7 @@ class Comments(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer,primary_key = True)
-    blogs_id = db.Column(db.Integer,db.ForeignKey('blogs.id'),nullable = False)
+    blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'),nullable = False)
     comment = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
@@ -53,7 +53,7 @@ class Comments(db.Model):
 
     @classmethod
     def get_comment(cls,blog_id):
-        comments = Comment.query.filter_by(blog_id=blog_id).all()
+        comments = Comments.query.filter_by(blog_id=blog_id).all()
         return comments
     
     def __repr__(self):
@@ -74,4 +74,24 @@ class Blogs(db.Model):
 
   
   
+class Quote:
+    '''
+  Quote class to define Quote Objects
+    '''
+
+    __tablename__ = 'quotes'
+    id = db.Column(db.Integer, primary_key = True)
+    author = db.Column(db.String(255))
+    quote = db.Column(db.String(2000))
     
+    def save(self,):
+            db.session.add(self)
+            db.session.commit()
+
+    @classmethod
+    def get_quote(cls,id):
+        quote = Quote.query.filter_by(id=id).all()
+        return quote
+    
+    def __repr__(self):
+        return f'Comment {self.quote}'

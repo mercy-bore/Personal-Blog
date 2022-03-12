@@ -18,7 +18,7 @@
         <h2>Welcome to My Personal Blog.</h2>
 
 
-        <p><a style="background-color: white; color: black;" href=" {{url_for('main.blog_form')}} " class="btn btn-primary" role="button">Blog</a></p>
+        <p><a style="background-color: #b5179e; color: white;" href=" {{url_for('main.blog_form')}} " class="btn btn-primary" role="button">Blog</a></p>
 
     </div>
     <div class="row">
@@ -27,9 +27,9 @@
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
                 <div class="caption">
-                    <h3> {{blog.title}}</h3>
-                    <p>My blog: {{blog.blog_text}}</p>
-                    <p><a style="background-color: black; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a></p>
+                    <h3 style="color: #893168; "> {{blog.title}}</h3>
+                    <p> {{blog.blog_text}}</p>
+                    <p><a style="background-color:#b5179e; color: white;" href=" {{url_for('main.comment',blog_id = blog.id)}} " class="btn btn-primary" role="button">Comment</a></p>
                 </div>
             </div>
         </div> {% endfor %}
