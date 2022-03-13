@@ -32,7 +32,7 @@ class ProdConfig(Config):
     '''
     # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:2015@localhost/blogs'
     # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
-    SQLALCHEMY_DATABASE_URI  ='postgresql://txkjwgqssabmfe:d7d3418f0fdc6768abb189b94a24d7da7aac2c35d417e6832fa3a185de429206@ec2-44-195-191-252.compute-1.amazonaws.com:5432/dcfun1m7m7fbcv'
+    SQLALCHEMY_DATABASE_URI  ='postgresql://jwwgorxkpqcxle:434f94ccb778a0d6bf62316163b80a4daaf1a133e593d700ba47701e38d7d140@ec2-34-231-183-74.compute-1.amazonaws.com:5432/dbqdjqpuk0bapa'
 
 
 
