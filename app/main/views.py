@@ -3,7 +3,7 @@ from idna import valid_string_length
 from . import main
 from ..email import mail_message
 from ..requests import get_quote
-from .forms import CommentForm,UpdateProfile,BlogForm,SubscribeForm,UpdateBlog
+from .forms import CommentForm, UpdateComment,UpdateProfile,BlogForm,SubscribeForm,UpdateBlog
 from ..models import User,Comments,Blogs,Subscribe
 from flask_login import login_required, current_user
 from .. import db
@@ -100,13 +100,13 @@ def subscribe():
     return render_template('subscribe.html',subscribe_form=subscribe_form)
 
 
-@main.route('/delete_comment/<int:id>', methods=['GET', 'POST'])
+@main.route('/delete_comment/<int:blog_id>', methods=['GET', 'POST'])
 @login_required
-def delete_comment(id):
-    comment =Comments.query.get_or_404(id)
+def delete_comment(blog_id):
+    comment =Comments.query.get_or_404(blog_id)
     db.session.delete(comment)
     db.session.commit()
-    return redirect (url_for('main.index'))
+    return redirect (url_for('main.index',blog_id = id))
 
 @main.route('/delete_blog/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -116,23 +116,29 @@ def delete_blog(id):
     db.session.commit()
     return redirect (url_for('main.index'))
 
-@main.route('/update_comment/<int:id>', methods=['GET', 'POST'])
+
+
+
+
+@main.route('/update_comment/<int:blog_id>', methods=['GET','POST'])
 @login_required
-def update_comment(id):
-    comment =Comments.query.get_or_404(id)
-    db.session.update(comment)
-    db.session.commit()
-    return redirect (url_for('main.index'))
-
-
-
+def update_comment(blog_id):
+    form = UpdateComment()
+  
+    
+    if form.validate_on_submit():
+        comment = Comments.query.filter_by(id=blog_id).first()
+        text=form.text.data
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('main.index', blog_id=blog_id, text=text))
+    return render_template('update_comment.html', form=form)
 
 @main.route('/update_blog/<int:blog_id>', methods=['GET','POST'])
 @login_required
 def update_blog(blog_id):
     form = UpdateBlog()
   
-    
     if form.validate_on_submit():
         blog = Blogs.query.filter_by(id=blog_id).first()
         text=form.text.data
@@ -140,3 +146,5 @@ def update_blog(blog_id):
         db.session.commit()
         return redirect(url_for('main.index', blog_id=blog_id, text=text))
     return render_template('update_blog.html', form=form)
+
+

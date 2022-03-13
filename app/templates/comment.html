@@ -13,8 +13,8 @@
                     <ul>
                         <li>
                             <h5> {{ comment.comment }}</h5>
-                            <a style="color:#b5179e; background-color: white;" href="{{url_for( 'main.delete_comment',id=comment.id)}}"><button>Delete</button></a>
-                            <a style="color:#b5179e; background-color: white;" href="{{url_for( 'main.update_comment',id=comment.id)}}"><button>Update</button></a>
+                            <a style="color:#b5179e; background-color: white;" href="{{url_for( 'main.delete_comment',blog_id=comment.id)}}"><button>Delete</button></a>
+                            <a style="color:#b5179e; background-color: white;" href="{{url_for( 'main.update_comment',blog_id=comment.id)}}"><button>Update</button></a>
                         </li>
                     </ul>
 

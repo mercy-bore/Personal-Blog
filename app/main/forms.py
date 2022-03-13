@@ -18,6 +18,9 @@ class UpdateBlog(FlaskForm):
     text = TextAreaField('Edit blog ',validators = [DataRequired()])
     submit = SubmitField('Update')
 
+class UpdateComment(FlaskForm):
+    text = TextAreaField('Edit comment ',validators = [DataRequired()])
+    submit = SubmitField('Update')
 class SubscribeForm(FlaskForm):
     email = StringField('Enter your  email',validators = [DataRequired()])
     username = StringField('Username', validators = [DataRequired()])
